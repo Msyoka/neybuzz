@@ -7,13 +7,13 @@ from django.http import Http404
 from .forms import *
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User
+from hood import serializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import HoodSerializer,ProfileSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
 
-from hood import serializer
 
 # Create your views here.
 @login_required(login_url='accounts/login/')
