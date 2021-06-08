@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-9rl_ph8)^x$4z#d+g9e51rrgcfiqd0wz4de7@47qxdfimsuzi3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'neybuz.herokuapp.com']
 
 
 # Application definition
@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'neybuzz.urls'
@@ -106,6 +107,8 @@ DATABASES = {
        
     }
 }
+
+WHITENOISE_USE_FINDERS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -156,3 +159,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
